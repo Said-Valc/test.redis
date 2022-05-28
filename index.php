@@ -23,7 +23,8 @@ catch (Exception $e) {
 if(isset($argv)){
 $command = implode(' ',$argv);
 }
-if((strpos($command, 'redis add')) !== false){
+if((strpos($command, 'redis add')) !== false)
+{
     if(preg_match('/\{(.+)\}\s*\{(.+)\}/', $command, $matches)){
         $key = $matches[1];
         $value = $matches[2];
@@ -31,18 +32,18 @@ if((strpos($command, 'redis add')) !== false){
         $value = $redis->get($key);
         print $value;
     }
-}elseif((strpos($command, 'redis delete')) !== false){
+}
+	elseif((strpos($command, 'redis delete')) !== false)
+{
     if(preg_match('/\{(.+)\}/', $command, $matches)){
         $key = $matches[1];
-        // $value = $redis->delete($key);
-        // print $value;
-        
         $res = $redis->del($key);
         if($res) echo 'Удалено';
     }
 }
 
-if($method === 'GET'){
+if($method === 'GET')
+{
     if($type === 'api/redis'){
         $keys = $redis->keys('*');
 		$data = [];
@@ -59,7 +60,9 @@ if($method === 'GET'){
 
     echo json_encode($res);
     }
-}elseif($method === 'DELETE'){
+}
+	elseif($method === 'DELETE')
+{
     if($type === 'api/redis'){
         if(isset($KEY)){
            $result = $redis->del($KEY);

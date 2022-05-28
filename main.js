@@ -11,20 +11,14 @@ async function getItems(){
 	}
 }
 
-
-
-
 async function removeRedisItem(key){
     const res = await fetch(`http://php.practice.loc/redis/api/redis/${key}`,{
         method: "DELETE"
     });
-
     const data = await res.json();
     if(data.status === true){
         await getItems();
     }
 }
-
-
 
 getItems();
