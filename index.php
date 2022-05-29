@@ -23,6 +23,7 @@ catch (Exception $e) {
 if(isset($argv)){
 $command = implode(' ',$argv);
 }
+//конструкторы для командной строки
 if((strpos($command, 'redis add')) !== false)
 {
     if(preg_match('/\{(.+)\}\s*\{(.+)\}/', $command, $matches)){
@@ -50,6 +51,7 @@ if((strpos($command, 'redis add')) !== false)
 	print_r($data);
 }
 
+//конструкторы для внешней api
 if($method === 'GET')
 {
     if($type === 'api/redis'){
