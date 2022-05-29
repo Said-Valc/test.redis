@@ -29,8 +29,9 @@ if((strpos($command, 'redis add')) !== false)
         $key = $matches[1];
         $value = $matches[2];
         $redis->set($key, $value);
-        $value = $redis->get($key);
-        print $value;
+        $value = $redis->get($key);		
+		$redis->expireat($key, time() + 3600); // истечёт через 1 час
+		$redis->ttl($key); 
     }
 }
 	elseif((strpos($command, 'redis delete')) !== false)
@@ -40,6 +41,13 @@ if((strpos($command, 'redis add')) !== false)
         $res = $redis->del($key);
         if($res) echo 'Удалено';
     }
+}elseif((strpos($command, 'redis get')) !== false){
+	$keys = $redis->keys('*');
+		$data = [];
+		foreach($keys as $key){
+			$data[$key] = $redis->get($key);
+		}
+	print_r($data);
 }
 
 if($method === 'GET')
