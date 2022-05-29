@@ -23,6 +23,7 @@ catch (Exception $e) {
 if(isset($argv)){
 $command = implode(' ',$argv);
 }
+
 //конструкторы для командной строки
 if((strpos($command, 'redis add')) !== false)
 {
@@ -34,8 +35,7 @@ if((strpos($command, 'redis add')) !== false)
 		$redis->expireat($key, time() + 3600); // истечёт через 1 час
 		$redis->ttl($key); 
     }
-}
-	elseif((strpos($command, 'redis delete')) !== false)
+}elseif((strpos($command, 'redis delete')) !== false)
 {
     if(preg_match('/\{(.+)\}/', $command, $matches)){
         $key = $matches[1];
@@ -70,8 +70,7 @@ if($method === 'GET')
 
     echo json_encode($res);
     }
-}
-	elseif($method === 'DELETE')
+}elseif($method === 'DELETE')
 {
     if($type === 'api/redis'){
         if(isset($KEY)){
